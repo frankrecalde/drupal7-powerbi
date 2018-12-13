@@ -1,0 +1,67 @@
+<?php
+
+/**
+ * @file
+ * Include inc file.
+ */
+
+module_load_include('inc', 'powerbi', 'admin');
+module_load_include('inc', 'powerbi', 'admin.forms');
+
+/**
+ * Implements hook_theme().
+ */
+function powerbi_theme() {
+  $theme = array();
+  $path = drupal_get_path('module', 'powerbi');
+  $path .= '/templates';
+  $theme['get-pbi-dashboard'] = array(
+    'variables' => array(
+      'debug' => NULL,
+      'response' => NULL,
+    ),
+    'template' => 'pbi-dashboard',
+    'path' => $path,
+  );
+  $theme['get-pbi-reports'] = array(
+    'variables' => array(
+      'debug' => NULL,
+      'response' => NULL,
+    ),
+    'template' => 'pbi-reports',
+    'path' => $path,
+  );
+  return $theme;
+}
+
+/**
+ * Implements hook_menu().
+ */
+function powerbi_menu() {
+  $items = array();
+
+  $items['admin/config/services/powerbi/settings'] = array(
+    'title' => 'Power BI settings',
+    'description' => 'Configure Power BI Settings.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('powerbi_settings_form'),
+    'access arguments' => array('administer access control'),
+  );
+  $items['pbi/dashboard'] = array(
+    'title' => 'PBI Dashboard',
+    'description' => 'Return data of Power BI dashboard.',
+    'page callback' => 'pbi_get_dashboard',
+    'page arguments' => array('GET','dashboards'),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['pbi/reports'] = array(
+    'title' => 'PBI Reports',
+    'description' => 'Return data of Power BI reports.',
+    'page callback' => 'pbi_get_reports',
+    'page arguments' => array('GET','reports'),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}

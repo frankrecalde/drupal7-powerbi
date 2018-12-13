@@ -1,0 +1,4 @@
+name = Power Bi
+description = This Drupal module supports Microsoft Power BI Embedded, including dashboards, reports, report visuals, Q&A, and tiles. Power BI is a sophisticated data analytics software and service package from Microsoft. More information on Power BI is available at <a href="http://www.powerbi.com" target="_blank">www.powerbi.com.</a>
+core = 7.x
+package = web services
